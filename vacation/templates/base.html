@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+        Главная страница
+    {% endblock %} </title>
+</head>
+
+<body>
+
+{% include 'inc/_header.html' %}
+
+{% block content %}<p>Контент</p>
+
+{% endblock %}
+
+{% include 'inc/_footer.html' %}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
