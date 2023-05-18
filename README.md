@@ -1,1 +1,1 @@
-# password_generator
+# plekhanov_university_diploma: final_assessment_project_django
