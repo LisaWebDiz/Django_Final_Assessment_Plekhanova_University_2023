@@ -10,9 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import environ
+import os
+
 from pathlib import Path
 
-import os
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,11 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g&ob*31%_3x5tbm=ggjwc9@rax2hp04m4zl#a-=tu@8qels0s%'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -82,13 +87,12 @@ WSGI_APPLICATION = 'V_V.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'valencian_vacation',
-        'USER': 'postgres',
-        'PASSWORD': open(r'C:/Users/lisaa/Documents/Плеханова/postgre.txt', 'r').read(),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-
+        'ENGINE': env('DB_ENGINE'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -146,10 +150,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-EMAIL_HOST_USER = open(r'C:/Users/lisaa/Documents/Плеханова/host_user.txt', 'r').read()
-EMAIL_HOST_PASSWORD = open(r'C:/Users/lisaa/Documents/Плеханова/Пароль для внешних приложений.txt', 'r').read()
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_PORT = 465
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST = ''
+EMAIL_PORT = ''
 EMAIL_USE_SSL = True
 EMAIL_USE_TLC = True
 
