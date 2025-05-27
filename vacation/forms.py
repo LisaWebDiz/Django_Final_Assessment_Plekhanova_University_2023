@@ -1,15 +1,13 @@
 from django import forms
-from .models import Villa, Yacht, Vehicle, YachtPhotos, VehiclePhotos
-import re
-from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+
+from .models import Villa, Yacht, Vehicle, YachtPhotos, VehiclePhotos
 
 
 class VillaForm(forms.ModelForm):
     class Meta:
         model = Villa
-        # fields = '__all__'
         fields = ['title', 'region', 'description', 'rooms_number', 'bedrooms_number', 'bathrooms_number', 'total_area',
                   'living_area', 'sea_distance', 'additional_info', 'price_per_day', 'exist']
 
@@ -92,7 +90,6 @@ class VillaForm(forms.ModelForm):
 class YachtForm(forms.ModelForm):
     class Meta:
         model = Yacht
-        # fields = '__all__'
         fields = ['title', 'length', 'width', 'cabins_number', 'beds_number', 'maximum_speed', 'additional_info',
                   'price_per_day', 'exist']
 
@@ -157,7 +154,6 @@ class YachtForm(forms.ModelForm):
 class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
-        # fields = '__all__'
         fields = ['title', 'description', 'color', 'seats_number', 'doors_number', 'horsepower', 'engine',
                   'transmission', 'drive', 'maximum_speed', 'price_per_day', 'exist']
 
@@ -237,81 +233,10 @@ class VehicleForm(forms.ModelForm):
         }
 
 
-# class VillaPhotosForm(forms.ModelForm):
-#     class Meta:
-#         model = VillaPhotos
-#         # fields = '__all__'
-#         fields = ['photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7',
-#                   'photo_8', 'photo_9', 'photo_10']
-#
-#         widgets = {
-#             'photo_1': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 1"
-#                 }
-#             ),
-#             'photo_2': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 2"
-#                 }
-#             ),
-#             'photo_3': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 3"
-#                 }
-#             ),
-#             'photo_4': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 4"
-#                 }
-#             ),
-#             'photo_5': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 5"
-#                 }
-#             ),
-#             'photo_6': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 6"
-#                 }
-#             ),
-#             'photo_7': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 7"
-#                 }
-#             ),
-#             'photo_8': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 8"
-#                 }
-#             ),
-#             'photo_9': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 9"
-#                 }
-#             ),
-#             'photo_10': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': "Фото 10"
-#                 }
-#             )
-#         }
-
-
 class YachtPhotosForm(forms.ModelForm):
+
     class Meta:
         model = YachtPhotos
-        # fields = '__all__'
         fields = ['photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7',
                   'photo_8', 'photo_9', 'photo_10']
 
@@ -380,9 +305,9 @@ class YachtPhotosForm(forms.ModelForm):
 
 
 class VehiclePhotosForm(forms.ModelForm):
+
     class Meta:
         model = VehiclePhotos
-        # fields = '__all__'
         fields = ['photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7',
                   'photo_8', 'photo_9', 'photo_10']
 
@@ -501,19 +426,3 @@ class ContactForm(forms.Form):
                    'rows': 11, },
         )
     )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

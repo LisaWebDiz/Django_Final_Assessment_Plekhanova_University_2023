@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Автомобили
+{% endblock %}
+
+{% block content %}
+
+    <h3>Наши автомобили</h3>
+
+    <div class="album py-5 bg-light">
+
+    <div class="container" style="margin-left: 8px;">
+        <a class="btn btn-outline-secondary" style="margin-left: 8px;" href="{% url 'index_vacation' %}">На
+            главную</a>
+        {% if perms.vacation.add_vehicle %}
+            <a class="btn btn-outline-secondary" href="{% url 'add_vehicle' %}">Добавить автомобиль</a>
+        {% endif %}
+    </div>
+    <br>
+    <br>
+
+    <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        {% for item in page_obj %}
+            <div class="container">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+
+                                <div class="carousel-item active">
+                                    {% if item.photo %}
+                                        <img src="{{ item.photo.url }}" width="500" height="300"
+                                             class="d-block w-100" alt="...">
+                                    {% endif %}
+                                </div>
+
+                                {% for vehicle_photo in vehicle_photos %}
+                                    {% if item.id == vehicle_photo.vehicle_id %}
+                                        {% for i in vehicle_photo %}
+
+                                            {% if i %}
+                                                {% if 'image' in i %}
+                                                    <div class="carousel-item">
+                                                        <img src=" /media/{{ i }} " width="500" height="300"
+                                                             class="d-block w-100" alt="...">
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-text">{{ item.title }}</h5>
+                                <div class="container">
+                                    <div> Цвет: {{ item.color }} </div>
+                                    <div> Трансмиссия : {{ item.transmission }} </div>
+                                </div>
+                                <br>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="container">
+
+                                        <svg fill="#000000" height="18px" width="18px" version="1.1" id="Capa_1"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             viewBox="0 0 240.235 240.235" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                               stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier"> <path
+                                                    d="M211.744,6.089C208.081,2.163,203.03,0,197.52,0h-15.143c-11.16,0-21.811,8.942-23.74,19.934l-0.955,5.436 c-0.96,5.47,0.332,10.651,3.639,14.589c3.307,3.938,8.186,6.106,13.74,6.106h19.561c2.714,0,5.339-0.542,7.778-1.504l-2.079,17.761 c-2.001-0.841-4.198-1.289-6.507-1.289h-22.318c-9.561,0-18.952,7.609-20.936,16.961l-19.732,93.027l-93.099-6.69 c-5.031-0.36-9.231,1.345-11.835,4.693c-2.439,3.136-3.152,7.343-2.009,11.847l10.824,42.618 c2.345,9.233,12.004,16.746,21.53,16.746h78.049h1.191h39.729c9.653,0,18.336-7.811,19.354-17.411l15.272-143.981 c0.087-0.823,0.097-1.634,0.069-2.437l5.227-44.648c0.738-1.923,1.207-3.967,1.354-6.087l0.346-4.97 C217.214,15.205,215.407,10.016,211.744,6.089z"></path> </g></svg>
+                                        <small class="text-muted">{{ item.seats_number }}</small>
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 512 512"
+                                             width="24" height="24" viewBox="0 0 512 512" id="car-door">
+                                            <path d="M59.123 439.648c1.073 6.727 6.875 11.677 13.687 11.677h354.154c18.711 0 37.006-7.207 49.689-20.998 3.078-3.339 5.912-7.032 8.627-10.874H55.902L59.123 439.648zM51.407 373.52h443.258c3.826 0 7.381 1.029 10.557 2.691 9.808-36.141 7.636-79.069-11.59-116.78-4.644-9.078-11.642-16.771-19.82-22.8L303.747 111.334c-44.699-32.849-98.685-50.659-154.195-50.659H14.929c-8.526 0-15.03 7.624-13.687 16.043l47.38 297.083C49.545 373.688 50.453 373.52 51.407 373.52zM152.259 293.849c0 2.544-2.062 4.606-4.606 4.606H80.279c-2.544 0-4.606-2.062-4.606-4.606v-10.79c0-2.544 2.062-4.606 4.606-4.606h67.375c2.543 0 4.606 2.062 4.606 4.606V293.849zM149.552 95.326c48.372 0 94.596 15.177 133.682 43.937l109.496 80.667H59.183L39.294 95.326H149.552zM494.665 384.371H51.409c-6.691 0-12.115 5.424-12.115 12.115s5.424 12.115 12.115 12.115h443.257c6.691 0 12.115-5.424 12.115-12.115S501.356 384.371 494.665 384.371z"></path>
+                                        </svg>
+                                        <small class="text-muted">{{ item.doors_number }}</small>
+                                    </div>
+                                    <br>
+
+                                    <div class="btn-group">
+                                        <a href="{% url 'the_vehicle' item.pk %}"
+                                           class="btn btn-sm btn-outline-secondary">Подробнее</a>
+
+                                        {% if perms.vacation.change_yacht %}
+                                            <a href="{% url 'edit_vehicle' item.pk %}"
+                                               class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        {% endfor %}
+
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class='container'>
+        <div class="row align-items-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for page in page_obj.paginator.page_range %}
+                        {% if page_obj.number == page %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="#">{{ page }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}

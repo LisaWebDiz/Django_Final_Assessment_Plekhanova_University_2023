@@ -1,5 +1,5 @@
 from django.conf import settings
-from vacation.models import Villa #Category,Yacht
+from vacation.models import Villa
 
 
 class Basket:
@@ -60,5 +60,3 @@ class Basket:
         for item in basket.values():
             item['total_price'] = float(item['price_prod']) * int(item['count_prod'])
             yield item
-
-

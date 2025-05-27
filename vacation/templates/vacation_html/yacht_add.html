@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Добавление яхты
+{% endblock %}
+
+{% block content %}
+
+    <h2>Добавить яхту</h2>
+
+    <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-light rounded-3">
+
+            <form method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_p }}
+                </table>
+                <input class="btn btn-info" type="submit" value="Добавить яхту">
+                <a href="{% url 'villas_list' %}" class="btn btn-sm btn-outline-secondary">Назад</a>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

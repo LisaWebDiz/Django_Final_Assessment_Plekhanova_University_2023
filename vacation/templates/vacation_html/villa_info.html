@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ villa_item.title }}
+{% endblock %}
+
+{% block content %}
+
+    <h3>{{ villa_item.title }}</h3>
+    <div class="album py-5 bg-light">
+
+        <div class="container" style="margin-left: 8px;">
+            <a class="btn btn-outline-secondary" href="{% url 'villas_list' %}">Назад</a>
+        </div>
+
+        <div class="card" style="width: 700px; margin: 10px auto 20px; display: block;">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                {% if villa_item.photo %}
+                                    <img src="{{ villa_item.photo.url }}" height="480"
+                                         class="d-block w-100" alt="...">
+                                {% endif %}
+                            </div>
+
+                            {% for villa_photo in villa_photos %}
+                                {% if villa_item.id == villa_photo.villa_id %}
+                                    {% for i in villa_photo %}
+
+                                        {% if i %}
+                                            {% if 'image' in i %}
+                                                <div class="carousel-item">
+
+                                                    <img src=" /media/{{ i }} " width="500" height="480"
+                                                         class="d-block w-100" alt="...">
+                                                </div>
+
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleControls"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Предыдущий</span>
+                            </button>
+
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleControls"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Следующий</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container">
+
+            <form method="post" action="{% url 'add_basket' villa_item.pk %}">
+                {% csrf_token %}
+                {{ basket_form }}
+                <input type="submit" class="btn btn-secondary" value="Забронировать">
+            </form>
+            <br>
+
+            <p style="text-align:justify;"> {{ villa_item.description }} </p>
+            <p><b>Регион: </b> {{ villa_item.region }}   </p>
+            <p><b>Количество комнат:</b> {{ villa_item.rooms_number }}</p>
+            <p><b>Количество спален:</b> {{ villa_item.bedrooms_number }}</p>
+            <p><b>Количество ванных комнат:</b> {{ villa_item.bathrooms_number }}</p>
+            <p><b>Общая площадь:</b> {{ villa_item.total_area|floatformat:0 }} кв. м</p>
+            <p><b>Жилая площадь:</b> {{ villa_item.living_area|floatformat:0 }} кв. м</p>
+            <p><b>Расстояние до моря:</b> {{ villa_item.sea_distance }}</p>
+            <p><b>Дополнительные характеристики:</b> {{ villa_item.additional_info }}</p>
+            <p><b>Стоимость аренды на 1 сутки:</b> {{ villa_item.price_per_day|floatformat:0 }} €</p>
+            <br>
+
+            <a href="{% url 'email_contact' %}" class="btn btn-secondary">Задать вопрос</a>
+            <br>
+            <br>
+
+            <div class="btn-group">
+                {% if perms.vacation.change_villa %}
+                    <a href="{% url 'edit_villa' villa_item.pk %}"
+                       class="btn btn btn-info">Редактировать виллу</a>
+                {% endif %}
+                <br>
+                {% if perms.vacation.delete_villa %}
+                    <form method="post" action="{% url 'del_villa' villa_item.pk %}">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger" value="Удалить виллу">
+                    </form>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

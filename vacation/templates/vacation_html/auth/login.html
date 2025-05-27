@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Авторизация пользователя
+{% endblock %}
+
+{% block content %}
+    <h2>Авторизация на сайте</h2>
+    <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-light rounded-3">
+
+            <form method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_p }}
+                </table>
+                <input type="submit" class="btn btn-info" value="Войти">
+                <a href="{% url 'regis' %}" class="btn btn-sm btn-outline-secondary">Зарегистрироваться</a>
+                <a href="{% url 'villas_list' %}" class="btn btn-sm btn-outline-secondary">Назад</a>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,13 +1,6 @@
 from django.contrib import admin
-from .models import Villa, Yacht, Vehicle, VillaPhotos, YachtPhotos, VehiclePhotos# , Category
 
-
-# class CategoryAdmin(admin.ModelAdmin):
-#     list_display = ['name', 'slug']
-#     prepopulated_fields = {'slug': ('name',)}
-#
-#
-# admin.site.register(Category, CategoryAdmin)
+from .models import Villa, Yacht, Vehicle, VillaPhotos, YachtPhotos, VehiclePhotos  # , Category
 
 
 class VillaAdmin(admin.ModelAdmin):
@@ -46,6 +39,3 @@ admin.site.register(Vehicle, VehicleAdmin)
 admin.site.register(VillaPhotos)
 admin.site.register(YachtPhotos)
 admin.site.register(VehiclePhotos)
-
-
-

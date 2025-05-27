@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <html lang="en" data-bs-theme="light">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.111.3">
+    <title>Carousel Template · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+
+    <body>
+    <br>
+    <br>
+    <main>
+
+        <!-- Marketing messaging and featurettes
+       ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+
+        <div class="container marketing">
+            <div class="row">
+                <div class="col-lg-4">
+                    <svg class="bd-placeholder-img-1 rounded-circle" width="140" height="140"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Виллы</title>
+                    </svg>
+                    <h2 class="fw-normal">Виллы</h2>
+                    <p>Выбор роскошных особняков и вилл.</p>
+                    <p><a class="btn btn-secondary" href="{% url 'villas_list' %}">Подробнее »</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <svg class="bd-placeholder-img-2 rounded-circle" width="140" height="140"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                    </svg>
+                    <h2 class="fw-normal">Яхты</h2>
+                    <p>Выбор шикарных круизных яхт.</p>
+                    <p><a class="btn btn-secondary" href="{% url 'yachts_list' %}">Подробнее »</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <svg class="bd-placeholder-img-3 rounded-circle" width="140" height="140"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                    </svg>
+                    <h2 class="fw-normal">Автомобили</h2>
+                    <p>Выбор эксклюзивных суперкаров и кабриолетов.</p>
+                    <p><a class="btn btn-secondary" href="{% url 'vehicles_list' %}">Подробнее »</a></p>
+                </div><!-- /.col-lg-4 -->
+            </div><!-- /.row -->
+
+
+            <!-- START THE FEATURETTES -->
+
+            <hr class="featurette-divider">
+            <div class="row featurette">
+
+                <div class="col-md-7">
+                    <h2 class="featurette-heading fw-normal lh-1">Проведите отпуск в солнечной Испании. <span
+                            class="text-body-secondary">Ваше незабываемое путешествие, полное впечатлений.</span>
+                    </h2>
+                    <p class="lead">Оставновитесь на шикарной вилле на побережье Валенсии. Выйдите на роскошной яхте
+                        в
+                        Средиземное море. Прокатитесь на эксклюзивном автомобиле по окрестностям Коста-Бланки. </p>
+                    <a href="{% url 'email_contact' %}" class="btn btn-secondary">Оставить заявку</a>
+                </div>
+                <div class="col-md-5">
+                    <div id="myCarousel" class="carousel slide pointer-event" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class=""
+                                    aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"
+                                    class="active" aria-current="true"></button>
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"
+                                    aria-label="Slide 3"
+                                    class=""></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <svg class="bd-placeholder-img-4" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+                            </div>
+                            <div class="carousel-item active">
+                                <svg class="bd-placeholder-img-5" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+                            </div>
+                            <div class="carousel-item">
+                                <svg class="bd-placeholder-img-6" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                <div class="col-md-7 order-md-2">
+                    <h2 class="featurette-heading fw-normal lh-1">Воспользуйтесь преимуществами нашего предложения.
+                        <span
+                                class="text-body-secondary">Опции, тщательно подобранные исключительно под Ваш запрос.</span>
+                    </h2>
+                    <p class="lead">Выберите виллу для прекрасного отдыха, яхту для морской прогулки, автомобиль для
+                        путешествий по окрестностям.</p>
+                    <a href="{% url 'email_contact' %}" class="btn btn-secondary">Оставить заявку</a>
+                </div>
+                <div class="col-md-5 order-md-1">
+
+                    <div id="myCarousel" class="carousel slide pointer-event" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class=""
+                                    aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"
+                                    class="active" aria-current="true"></button>
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"
+                                    aria-label="Slide 3"
+                                    class=""></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <svg class="bd-placeholder-img-7" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+                            </div>
+                            <div class="carousel-item active">
+                                <svg class="bd-placeholder-img-8" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+                            </div>
+                            <div class="carousel-item">
+                                <svg class="bd-placeholder-img-9" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading fw-normal lh-1">Закажите дополнительные услуги. <span
+                            class="text-body-secondary">Ваши особенные пожелания.</span></h2>
+                    <p class="lead">Не забудьте сообщить нам о любых Ваших предпочтениях. Они будут исполнены.</p>
+                    <a href="{% url 'email_contact' %}" class="btn btn-secondary">Оставить заявку</a>
+                </div>
+                <div class="col-md-5">
+                    <div id="myCarousel" class="carousel slide pointer-event" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class=""
+                                    aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"
+                                    class="active" aria-current="true"></button>
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"
+                                    aria-label="Slide 3"
+                                    class=""></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <svg class="bd-placeholder-img-10" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+
+                            </div>
+                            <div class="carousel-item active">
+                                <svg class="bd-placeholder-img-11" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+                            </div>
+                            <div class="carousel-item">
+                                <svg class="bd-placeholder-img-12" width="500px" height="500px"
+                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false">
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- /END THE FEATURETTES -->
+
+        </div><!-- /.container -->
+
+    </main>
+
+    </body>
+    </html>
+{% endblock %}

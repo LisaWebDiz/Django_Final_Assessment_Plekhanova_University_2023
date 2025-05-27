@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from vacation.models import Villa # Yacht, Category
+from django.views.decorators.http import require_POST
+
+from vacation.models import Villa
 from .basket import Basket
 from .forms import BasketAddProductForm
-from django.views.decorators.http import require_POST
-from django.contrib.auth.decorators import login_required
 
 
 @login_required
@@ -39,6 +40,3 @@ def basket_clear(request):
     basket = Basket(request)
     basket.clear()
     return redirect('villas_list')
-
-
-

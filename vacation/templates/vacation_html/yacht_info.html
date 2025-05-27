@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ yacht_item.title }}
+{% endblock %}
+
+{% block content %}
+
+    <h3>{{ yacht_item.title }}</h3>
+
+    <div class="album py-5 bg-light">
+
+        <div class="container" style="margin-left: 8px;">
+            <a class="btn btn-outline-secondary" href="{% url 'yachts_list' %}">Назад</a>
+        </div>
+
+        <div class="card" style="width: 700px; margin: 10px auto 20px; display: block;">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                {% if yacht_item.photo %}
+                                    <img src="{{ yacht_item.photo.url }}" height="480"
+                                         class="d-block w-100" alt="...">
+                                {% endif %}
+                            </div>
+
+                            {% for yacht_photo in yacht_photos %}
+                                {% if yacht_item.id == yacht_photo.yacht_id %}
+                                    {% for i in yacht_photo %}
+
+                                        {% if i %}
+                                            {% if 'image' in i %}
+                                                <div class="carousel-item">
+
+                                                    <img src=" /media/{{ i }} " width="500" height="480"
+                                                         class="d-block w-100" alt="...">
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleControls"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Предыдущий</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleControls"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Следующий</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="container">
+            <a href="{% url 'email_contact' %}" class="btn btn-secondary">Оставить заявку</a>
+            <br>
+            <br>
+
+            <p><b>Длина: </b> {{ yacht_item.length }} м</p>
+            <p><b>Ширина:</b> {{ yacht_item.width }} м</p>
+            <p><b>Количество кают:</b> {{ yacht_item.cabins_number }}</p>
+            <p><b>Количество спальных мест:</b> {{ yacht_item.beds_number }}</p>
+            <p><b>Максимальная скорость:</b> {{ yacht_item.maximum_speed|floatformat:0 }} узл</p>
+            <p><b>Дополнительные характеристики:</b> {{ yacht_item.additional_info }}</p>
+            <p><b>Стоимость аренды на 1 сутки:</b> {{ yacht_item.price_per_day|floatformat:0 }} €</p>
+            <br>
+            <br>
+
+            <div class="btn-group">
+                {% if perms.vacation.change_yacht %}
+                    <a href="{% url 'edit_yacht' yacht_item.pk %}"
+                       class="btn btn btn-info">Редактировать</a>
+                {% endif %}
+                {% if perms.vacation.delete_yacht %}
+                    <form method="post" action="{% url 'del_yacht' yacht_item.pk %}">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger" value="Удалить яхту">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

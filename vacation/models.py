@@ -2,22 +2,6 @@ from django.db import models
 from django.urls import reverse
 
 
-# class Category(models.Model):
-#     name = models.CharField(max_length=200, db_index=True)
-#     slug = models.SlugField(max_length=200, db_index=True, unique=True)
-#
-#     class Meta:
-#         ordering = ('name',)
-#         verbose_name = 'Катеририя'
-#         verbose_name_plural = 'Категории'
-#
-#     def __str__(self):
-#         return self.name
-#
-#     def get_absolute_url(self):
-#         return reverse('index_vacation', args=[self.slug])
-
-
 class Villa(models.Model):
     title = models.CharField(max_length=120, default='Вилла', null=False, verbose_name='Наименование')
     region = models.CharField(max_length=50, default='Регион', null=False, verbose_name='Регион')
@@ -46,9 +30,7 @@ class Villa(models.Model):
         verbose_name = 'Вилла'
         verbose_name_plural = 'Виллы'
         ordering = ['-price_per_day']
-        index_together = (('id', 'slug'),)
-
-    # category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, related_name='products_villa')
+        # index_together = (('id', 'slug'),)
 
 
 class Yacht(models.Model):
@@ -66,7 +48,6 @@ class Yacht(models.Model):
     exist = models.BooleanField(default=True, null=True, verbose_name='Предлагается?')
     slug = models.SlugField(max_length=200, default=False, db_index=True)
 
-
     def __str__(self):
         return 'Яхта: ' + self.title
 
@@ -77,9 +58,7 @@ class Yacht(models.Model):
         verbose_name = 'Яхта'
         verbose_name_plural = 'Яхты'
         ordering = ['-price_per_day']
-        index_together = (('id', 'slug'),)
-
-    # category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, related_name='products_yacht')
+        # index_together = (('id', 'slug'),)
 
 
 class Vehicle(models.Model):
@@ -98,8 +77,6 @@ class Vehicle(models.Model):
     publication_date = models.DateField(auto_now_add=True, null=True, verbose_name='Дата добавления')
     update_date = models.DateField(auto_now=True, null=True, verbose_name='Дата обновления')
     exist = models.BooleanField(default=True, null=True, verbose_name='Предлагается?')
-
-
 
     def __str__(self):
         return self.title
@@ -189,10 +166,3 @@ class VehiclePhotos(models.Model):
         verbose_name_plural = 'Фотографии автомобилей'
 
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, null=True, verbose_name='Автомобиль')
-
-
-
-
-
-
-
