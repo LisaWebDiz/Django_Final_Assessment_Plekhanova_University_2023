@@ -68,9 +68,11 @@
 
         <div class="container">
 
-            <form method="post" action="{% url 'add_basket' villa_item.pk %}">
+            <form method="post" action="{% url 'add_cart' 'villa' villa_item.pk %}">
                 {% csrf_token %}
-                {{ basket_form }}
+                {{ cart_form.count_prod.label_tag }}
+                {{ cart_form.count_prod }}
+                {{ cart_form.update }}
                 <input type="submit" class="btn btn-secondary" value="Забронировать">
             </form>
             <br>

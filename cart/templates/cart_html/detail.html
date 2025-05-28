@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Ваше бронирование
+{% endblock %}
+
+{% block content %}
+    <h3> Ваше бронирование </h3>
+    <div class="album py-5 bg-light">
+        <div class="container" style="margin-left: 8px;">
+            <a class="btn btn-outline-secondary" href="{% url 'index_vacation' %}">На главную</a>
+        </div>
+        <br>
+
+        <div class="container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Вилла</th>
+                    <th scope="col">Количество дней</th>
+                    <th scope="col">Стоимость аренды на 1 сутки</th>
+                    <th scope="col">Стоимость аренды на выбранное количество суток
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for item in cart %}
+                    {% with obj=item.the_object model_type=item.model_type product_id=item.product_id %}
+                        <tr>
+                            <td>
+                                {% if model_type == "villa" %}
+                                    <a href="{% url 'the_villa' obj.pk %}"><b>{{ obj.title }}</b></a>
+                                {% elif model_type == "yacht" %}
+                                    <a href="{% url 'the_yacht' obj.pk %}"><b>{{ obj.title }}</b></a>
+                                {% elif model_type == "vehicle" %}
+                                    <a href="{% url 'the_vehicle' obj.pk %}"><b>{{ obj.title }}</b></a>
+                                {% endif %}
+
+                                <br><br>
+
+                                {% if obj.photo %}
+                                    <img src="{{ obj.photo.url }}" style="width: 300px; height: 200px;" alt="...">
+                                {% else %}
+                                    <img src="{% static 'image/default.jpg' %}" style="width: 300px; height: 200px;"
+                                         alt="...">
+                                {% endif %}
+                            </td>
+                            <td>{{ item.count_prod }}</td>
+                            <td>€{{ item.price_prod|floatformat:2 }}</td>
+                            <td>€{{ item.total_price|floatformat:2 }}</td>
+                            <td>
+                                <a href="{% url 'remove_cart' product_id %}?type={{ model_type }}">Удалить</a>
+                            </td>
+                        </tr>
+                    {% endwith %}
+                {% endfor %}
+
+                <tr>
+                    <td><b>Общая стоимость:</b></td>
+                    <td colspan="3"></td>
+                    <td><b>€{{ cart.get_total_price|floatformat:2 }}</b></td>
+                </tr>
+            </table>
+            <div>
+
+                <p class="text-end"><a href="{% url 'email_contact' %}" class="btn btn-warning">Забронировать</a></p>
+                <br>
+                <a href="{% url 'villas_list' %}" class="btn btn-success">Посмотреть виллы</a>
+                <a href="{% url 'yachts_list' %}" class="btn btn-success">Посмотреть яхты</a>
+                <a href="{% url 'vehicles_list' %}" class="btn btn-success">Посмотреть автомобили</a>
+                <br>
+                <br>
+                <a href="{% url 'clear_cart' %}" class="btn btn-danger">Очистить запрос</a>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}

@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'vacation.apps.VacationConfig',
     'rest_framework',
-    'basket',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -157,4 +157,4 @@ EMAIL_USE_TLC = True
 
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
-BASKET_SESSION_ID = 'basket'
+CART_SESSION_ID = 'cart'

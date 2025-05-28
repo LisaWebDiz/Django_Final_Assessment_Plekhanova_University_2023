@@ -16,5 +16,5 @@ Scripts/
 staticfiles/
 media/
 static/
-basket/__pycache__/
+cart/__pycache__/
 V_V/__pycache__/

@@ -65,7 +65,13 @@
 
         <br>
         <div class="container">
-            <a href="{% url 'email_contact' %}" class="btn btn-secondary">Оставить заявку</a>
+            <form method="post" action="{% url 'add_cart' 'vehicle' vehicle_item.pk %}">
+                {% csrf_token %}
+                {{ cart_form.count_prod.label_tag }}
+                {{ cart_form.count_prod }}
+                {{ cart_form.update }}
+                <input type="submit" class="btn btn-secondary" value="Забронировать">
+            </form>
             <br>
             <br>
 

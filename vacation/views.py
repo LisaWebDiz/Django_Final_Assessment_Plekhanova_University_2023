@@ -12,7 +12,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from basket.forms import BasketAddProductForm
+from cart.forms import CartAddProductForm
 from .forms import VillaForm, YachtForm, VehicleForm, RegistrationForm, LoginForm, ContactForm
 from .models import Villa, Yacht, Vehicle, VillaPhotos, YachtPhotos, VehiclePhotos  # , Category
 from .serializer import VillaSerializer, YachtSerializer, VehicleSerializer
@@ -62,8 +62,6 @@ def yachts(request):
 
 
 def vehicles(request):
-#     category = None
-#     categories = Category.objects.all()
     vehicles_list = Vehicle.objects.all()
     vehicle_photos = list(VehiclePhotos.objects.all().values_list('vehicle_id',
                                                               'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5',
@@ -72,8 +70,6 @@ def vehicles(request):
 
     context = {'vehicles_list': vehicles_list,
                'vehicle_photos': vehicle_photos,
-               # 'category': category,
-               # 'categories': categories
                }
 
     paginator = Paginator(Vehicle.objects.all(), 3)
@@ -89,10 +85,10 @@ def villa_details(request, villa_id):
         'villa_id', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7', 'photo_8', 'photo_9',
         'photo_10', named=True)
     )
-    basket_form = BasketAddProductForm
+    cart_form = CartAddProductForm
     context = {
                 'villa_item': the_villa,
-                'basket_form': basket_form,
+                'cart_form': cart_form,
                 'villa_photos': villa_photos,
     }
 
@@ -105,9 +101,11 @@ def yacht_details(request, yacht_id):
         'yacht_id', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7', 'photo_8', 'photo_9',
         'photo_10', named=True)
     )
+    cart_form = CartAddProductForm
     context = {
                 'yacht_item': the_yacht,
                 'yacht_photos': yacht_photos,
+                'cart_form': cart_form,
     }
 
     return render(request, 'vacation_html/yacht_info.html', context)
@@ -119,9 +117,11 @@ def vehicle_details(request, vehicle_id):
         'vehicle_id', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7', 'photo_8',
         'photo_9', 'photo_10', named=True)
     )
+    cart_form = CartAddProductForm
     context = {
         'vehicle_item': the_vehicle,
         'vehicle_photos': vehicle_photos,
+        'cart_form': cart_form,
     }
 
     return render(request, 'vacation_html/vehicle_info.html', context)
