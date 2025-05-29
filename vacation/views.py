@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import permission_required
-from django.core import serializers
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
@@ -14,10 +13,8 @@ from rest_framework.response import Response
 
 from cart.forms import CartAddProductForm
 from .forms import VillaForm, YachtForm, VehicleForm, RegistrationForm, LoginForm, ContactForm
-from .models import Villa, Yacht, Vehicle, VillaPhotos, YachtPhotos, VehiclePhotos  # , Category
+from .models import Villa, Yacht, Vehicle
 from .serializer import VillaSerializer, YachtSerializer, VehicleSerializer
-
-data = serializers.serialize('python', VillaPhotos.objects.all(), fields=('photo_1', 'photo_2'))
 
 
 def index(request):
@@ -26,14 +23,9 @@ def index(request):
 
 def villas(request):
     villas_list = Villa.objects.all()
-    villa_photos = list(VillaPhotos.objects.all().values_list('villa_id',
-                                                              'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5',
-                                                              'photo_6', 'photo_7', 'photo_8', 'photo_9', 'photo_10',
-                                                              named=True))
 
     context = {
         'villas_list': villas_list,
-        'villa_photos': villa_photos,
     }
 
     paginator = Paginator(Villa.objects.all(), 3)
@@ -45,14 +37,10 @@ def villas(request):
 
 def yachts(request):
     yachts_list = Yacht.objects.all()
-    yacht_photos = list(YachtPhotos.objects.all().values_list('yacht_id',
-                                                              'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5',
-                                                              'photo_6', 'photo_7', 'photo_8', 'photo_9', 'photo_10',
-                                                              named=True))
 
-    context = {'yachts_list': yachts_list,
-               'yacht_photos': yacht_photos,
-              }
+    context = {
+        'yachts_list': yachts_list,
+    }
 
     paginator = Paginator(Yacht.objects.all(), 3)
     page_num = request.GET.get('page', 1)
@@ -63,14 +51,10 @@ def yachts(request):
 
 def vehicles(request):
     vehicles_list = Vehicle.objects.all()
-    vehicle_photos = list(VehiclePhotos.objects.all().values_list('vehicle_id',
-                                                              'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5',
-                                                              'photo_6', 'photo_7', 'photo_8', 'photo_9', 'photo_10',
-                                                              named=True))
 
-    context = {'vehicles_list': vehicles_list,
-               'vehicle_photos': vehicle_photos,
-               }
+    context = {
+        'vehicles_list': vehicles_list,
+    }
 
     paginator = Paginator(Vehicle.objects.all(), 3)
     page_num = request.GET.get('page', 1)
@@ -81,15 +65,11 @@ def vehicles(request):
 
 def villa_details(request, villa_id):
     the_villa = get_object_or_404(Villa, pk=villa_id)
-    villa_photos = list(VillaPhotos.objects.all().values_list(
-        'villa_id', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7', 'photo_8', 'photo_9',
-        'photo_10', named=True)
-    )
+
     cart_form = CartAddProductForm
     context = {
-                'villa_item': the_villa,
-                'cart_form': cart_form,
-                'villa_photos': villa_photos,
+        'villa_item': the_villa,
+        'cart_form': cart_form,
     }
 
     return render(request, 'vacation_html/villa_info.html', context)
@@ -97,15 +77,11 @@ def villa_details(request, villa_id):
 
 def yacht_details(request, yacht_id):
     the_yacht = get_object_or_404(Yacht, pk=yacht_id)
-    yacht_photos = list(YachtPhotos.objects.all().values_list(
-        'yacht_id', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7', 'photo_8', 'photo_9',
-        'photo_10', named=True)
-    )
+
     cart_form = CartAddProductForm
     context = {
-                'yacht_item': the_yacht,
-                'yacht_photos': yacht_photos,
-                'cart_form': cart_form,
+        'yacht_item': the_yacht,
+        'cart_form': cart_form,
     }
 
     return render(request, 'vacation_html/yacht_info.html', context)
@@ -113,14 +89,10 @@ def yacht_details(request, yacht_id):
 
 def vehicle_details(request, vehicle_id):
     the_vehicle = get_object_or_404(Vehicle, pk=vehicle_id)
-    vehicle_photos = list(VehiclePhotos.objects.all().values_list(
-        'vehicle_id', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6', 'photo_7', 'photo_8',
-        'photo_9', 'photo_10', named=True)
-    )
+
     cart_form = CartAddProductForm
     context = {
         'vehicle_item': the_vehicle,
-        'vehicle_photos': vehicle_photos,
         'cart_form': cart_form,
     }
 

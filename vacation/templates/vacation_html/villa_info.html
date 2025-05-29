@@ -19,48 +19,28 @@
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 
                         <div class="carousel-inner">
-
-                            <div class="carousel-item active">
-                                {% if villa_item.photo %}
-                                    <img src="{{ villa_item.photo.url }}" height="480"
-                                         class="d-block w-100" alt="...">
-                                {% endif %}
-                            </div>
-
-                            {% for villa_photo in villa_photos %}
-                                {% if villa_item.id == villa_photo.villa_id %}
-                                    {% for i in villa_photo %}
-
-                                        {% if i %}
-                                            {% if 'image' in i %}
-                                                <div class="carousel-item">
-
-                                                    <img src=" /media/{{ i }} " width="500" height="480"
-                                                         class="d-block w-100" alt="...">
-                                                </div>
-
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
+                            {% for photo in villa_item.villa_photos.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ photo.image.url }}" height="480" class="d-block w-100"
+                                         alt="Фото виллы">
+                                </div>
                             {% endfor %}
+                        </div>
 
+                        {% if villa_item.villa_photos.count > 1 %}
                             <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselExampleControls"
-                                    data-bs-slide="prev">
+                                    data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Предыдущий</span>
                             </button>
-
                             <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carouselExampleControls"
-                                    data-bs-slide="next">
+                                    data-bs-target="#carouselExampleControls" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Следующий</span>
                             </button>
-
-                        </div>
+                        {% endif %}
                     </div>
+
                 </div>
             </div>
         </div>

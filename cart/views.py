@@ -60,4 +60,4 @@ def cart_info(request):
 def cart_clear(request):
     cart = Cart(request)
     cart.clear()
-    return redirect('villas_list')
+    return redirect('index_vacation')

@@ -30,7 +30,6 @@ class Villa(models.Model):
         verbose_name = 'Вилла'
         verbose_name_plural = 'Виллы'
         ordering = ['-price_per_day']
-        # index_together = (('id', 'slug'),)
 
 
 class Yacht(models.Model):
@@ -58,7 +57,6 @@ class Yacht(models.Model):
         verbose_name = 'Яхта'
         verbose_name_plural = 'Яхты'
         ordering = ['-price_per_day']
-        # index_together = (('id', 'slug'),)
 
 
 class Vehicle(models.Model):
@@ -90,79 +88,43 @@ class Vehicle(models.Model):
         ordering = ['-price_per_day']
 
 
-class VillaPhotos(models.Model):
-    photo_1 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 1')
-    photo_2 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 2')
-    photo_3 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 3')
-    photo_4 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 4')
-    photo_5 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 5')
-    photo_6 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 6')
-    photo_7 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 7')
-    photo_8 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 8')
-    photo_9 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 9')
-    photo_10 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 10')
+class VillaPhoto(models.Model):
+    villa = models.ForeignKey(Villa, on_delete=models.PROTECT, null=True, verbose_name='Вилла',
+                              related_name='villa_photos')
+    image = models.ImageField(upload_to='image/%Y/%m/%d', verbose_name='Фото')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'Фотография виллы № ' + str(self.pk)
-
-    def get_absolute_url(self):
-        return reverse('villa_photo', kwargs={'villa_photo_id': self.pk})
+        return f'Фото виллы {self.villa.pk}'
 
     class Meta:
-        verbose_name = 'Фотография виллы'
-        verbose_name_plural = 'Фотографии вилл'
-
-    def get_fields(self):
-        return [field.value_from_object(self) for field in self.__class__._meta.fields]
-
-    villa = models.ForeignKey(Villa, on_delete=models.CASCADE, null=True, verbose_name='Вилла')
+        verbose_name = 'Фото виллы'
+        verbose_name_plural = 'Фотографии виллы'
 
 
-class YachtPhotos(models.Model):
-    photo_1 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 1')
-    photo_2 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 2')
-    photo_3 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 3')
-    photo_4 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 4')
-    photo_5 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 5')
-    photo_6 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 6')
-    photo_7 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 7')
-    photo_8 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 8')
-    photo_9 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 9')
-    photo_10 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 10')
+class YachtPhoto(models.Model):
+    yacht = models.ForeignKey(Yacht, on_delete=models.PROTECT, null=True, verbose_name='Яхта',
+                              related_name='yacht_photos')
+    image = models.ImageField(upload_to='image/%Y/%m/%d', verbose_name='Фото')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'Фотография яхты № ' + str(self.pk)
-
-    def get_absolute_url(self):
-        return reverse('yacht_photo', kwargs={'yacht_photo_id': self.pk})
+        return f'Фото яхты {self.yacht.pk}'
 
     class Meta:
-        verbose_name = 'Фотография яхты'
-        verbose_name_plural = 'Фотографии яхт'
-
-    yacht = models.ForeignKey(Yacht, on_delete=models.CASCADE, null=True, verbose_name='Яхта')
+        verbose_name = 'Фото яхты'
+        verbose_name_plural = 'Фотографии яхты'
 
 
-class VehiclePhotos(models.Model):
-    photo_1 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 1')
-    photo_2 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 2')
-    photo_3 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 3')
-    photo_4 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 4')
-    photo_5 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 5')
-    photo_6 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 6')
-    photo_7 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 7')
-    photo_8 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 8')
-    photo_9 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 9')
-    photo_10 = models.ImageField(null=True, blank=True, upload_to='image/%Y/%m/%d', verbose_name='Фото 10')
+class VehiclePhoto(models.Model):
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT, null=True, verbose_name='Автомобиль',
+                                related_name='vehicle_photos')
+    image = models.ImageField(upload_to='image/%Y/%m/%d', verbose_name='Фото')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'Фотография автомобиля №' + str(self.pk)
-
-    def get_absolute_url(self):
-        return reverse('vehicle_photo', kwargs={'vehicle_photo_id': self.pk})
+        return f'Фото автомобиля {self.vehicle.pk}'
 
     class Meta:
-        verbose_name = 'Фотография автомобиля'
-        verbose_name_plural = 'Фотографии автомобилей'
-
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, null=True, verbose_name='Автомобиль')
+        verbose_name = 'Фото автомобиля'
+        verbose_name_plural = 'Фотографии автомобиля'
