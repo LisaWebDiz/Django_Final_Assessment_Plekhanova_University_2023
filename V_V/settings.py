@@ -47,8 +47,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'vacation.apps.VacationConfig',
     'rest_framework',
+    'drf_spectacular',
     'cart',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+}
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',

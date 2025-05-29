@@ -1,4 +1,5 @@
 from django.urls import path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 from vacation.views import *
 
@@ -39,5 +40,10 @@ urlpatterns = [
     path('api/yachts/detail/<int:pk>', vacation_yacht_api_detail, name='vacation_yacht_api_detail'),
 
     path('api/vehicles/list', vacation_vehicles_api_list, name='vacation_vehicles_api_list'),
-    path('api/vehicles/detail/<int:pk>', vacation_vehicle_api_detail, name='vacation_vehicle_api_detail')
+    path('api/vehicles/detail/<int:pk>', vacation_vehicle_api_detail, name='vacation_vehicle_api_detail'),
+
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
 ]

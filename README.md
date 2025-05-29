@@ -8,3 +8,19 @@ API основных моделей.
 Тестирование приложения.  
 Администрирование сайта.  
 Фронтенд: CSS, Bootstrap  
+
+![Mainpage](assets/mainpage.png)
+![Registration](assets/registration.png)
+![Authentication](assets/auth.png)
+![Villas_Catalogue](assets/villas.png)
+![Yachts_Catalogue](assets/yachts.png)
+![Vehicles_Catalogue](assets/vehicles.png)
+![Villa_Detail](assets/villa_detail.png)
+![Yacht_Detail](assets/yacht_detail.png)
+![Vehicle_Detail](assets/vehicle_detail.png)
+![Your_Booking](assets/booking.png)
+![Add_Yacht](assets/yacht_add.png)
+![Update_Villa](assets/villa_update.png)
+![Contact us](assets/contact_us.png)
+
+
