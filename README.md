@@ -19,12 +19,12 @@ cp example.env .env
 docker-compose up --build
 docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
-
+```
 Enjoy!
 
 ### API Documentation
-Swagger: http://localhost:8000/swagger/
-Redoc: http://localhost:8000/redoc/
+    • Swagger: http://localhost:8000/swagger/
+    • Redoc: http://localhost:8000/redoc/
 
 ### Features
     • Django admin panel for managing data
@@ -48,5 +48,3 @@ Redoc: http://localhost:8000/redoc/
 ![Add_Yacht](assets/yacht_add.png)
 ![Update_Villa](assets/villa_update.png)
 ![Contact us](assets/contact_us.png)
-
-
