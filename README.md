@@ -12,21 +12,10 @@ API основных моделей.
 
 
 ### Quick start via Docker
-
 ```bash
 git clone https://github.com/yourusername/django_final_assessment_plekhanova_university.git
 cd django_final_assessment_plekhanova_university
-
 cp example.env .env
-DEBUG=True
-SECRET_KEY=your-secret-key
-POSTGRES_DB=vacation
-POSTGRES_USER=your_user
-POSTGRES_PASSWORD=your_password
-DB_HOST=db
-DB_PORT=5432
-
-```bash
 docker-compose up --build
 docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
@@ -37,8 +26,15 @@ Enjoy!
 Swagger: http://localhost:8000/swagger/
 Redoc: http://localhost:8000/redoc/
 
+### Features
+    • Django admin panel for managing data
+    • Fully documented REST API
+    • Data storage using PostgreSQL
+    • pgAdmin for database viewing: http://localhost:5050
+    • Admin panel: http://localhost:8000/admin/
+    • Registration/Authentication
 
-
+### Pages
 ![Mainpage](assets/mainpage.png)
 ![Registration](assets/registration.png)
 ![Authentication](assets/auth.png)
