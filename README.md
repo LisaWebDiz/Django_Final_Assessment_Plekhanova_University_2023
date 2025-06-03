@@ -1,4 +1,4 @@
-### Valencian Vacation: Plekhanov Uuniversity Final Assesment Diploma Django Project 2023
+# Valencian Vacation: Plekhanov Uuniversity Final Assesment Diploma Django Project 2023
 ### Description
 Web приложение для бронирования путешествия.  
 Вывод списка объектов трех основных моделей и трех связанных с ними моделей.  
@@ -14,31 +14,13 @@ API основных моделей.
 ### Quick start via Docker
 
 ```bash
-git clone https://github.com/yourusername/```bash
 git clone https://github.com/yourusername/django_final_assessment_plekhanova_university.git
 cd django_final_assessment_plekhanova_university
 
 cp example.env .env
 DEBUG=True
 SECRET_KEY=your-secret-key
-POSTGRES_DB=library
-POSTGRES_USER=your_user
-POSTGRES_PASSWORD=your_password
-DB_HOST=db
-DB_PORT=5432
-
-```bash
-docker-compose up --build
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser
-
-Enjoy!git
-cd ry_initial_django_project_2023
-
-cp example.env .env
-DEBUG=True
-SECRET_KEY=your-secret-key
-POSTGRES_DB=library
+POSTGRES_DB=vacation
 POSTGRES_USER=your_user
 POSTGRES_PASSWORD=your_password
 DB_HOST=db
@@ -50,6 +32,12 @@ docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
 
 Enjoy!
+
+### API Documentation
+Swagger: http://localhost:8000/swagger/
+Redoc: http://localhost:8000/redoc/
+
+
 
 ![Mainpage](assets/mainpage.png)
 ![Registration](assets/registration.png)
