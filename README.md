@@ -1,15 +1,7 @@
 # Valencian Vacation: Plekhanov Uuniversity Final Assesment Diploma Django Project 2023
-### Description
-Web приложение для бронирования путешествия.  
-Вывод списка объектов трех основных моделей и трех связанных с ними моделей.  
-API основных моделей.  
-Вывод каждого из объектов основных моделей и определенных полей, связанных с ними дополнительных моделей на отдельную страницу.  
-Формы добавления, редактирования, обновления объектов трех основных моделей.  
-Корзина, позволяющая бронировать объект на определенное количество дней.  
-Тестирование приложения.  
-Администрирование сайта.  
-Фронтенд: CSS, Bootstrap  
 
+### Description
+A web application for booking travel experiences such as villas, yachts, and vehicles. Includes a cart system that allows users to select objects for a chosen number of days and automatically calculates the total order cost.
 
 ### Quick start via Docker
 ```bash
@@ -23,16 +15,19 @@ docker-compose exec web python manage.py createsuperuser
 Enjoy!
 
 ### API Documentation
-    • Swagger: http://localhost:8000/swagger/
+    • Swagger UI: http://localhost:8000/swagger/
     • Redoc: http://localhost:8000/redoc/
 
-### Features
-    • Django admin panel for managing data
+### Key Features
+    • User registration & authentication via Djoser
+    • Django admin panel for managing data at http://localhost:8000/admin/
     • Fully documented REST API
     • Data storage using PostgreSQL
-    • pgAdmin for database viewing: http://localhost:5050
-    • Admin panel: http://localhost:8000/admin/
-    • Registration/Authentication
+    • Built-in pgAdmin interface for managing the database at http://localhost:5050
+    • Catalogue list view and detail view for villas, yachts & vehicles
+    • Add/edit/delete access to listings for authenticated users
+    • Cart functionality with day-based pricing and total order calculation — available for authenticated users
+    • Frontend styled with CSS and Bootstrap
 
 ### Pages
 ![Mainpage](assets/mainpage.png)
