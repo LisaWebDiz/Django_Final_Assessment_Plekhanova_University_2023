@@ -30,7 +30,7 @@ Enjoy!
     • Frontend styled with CSS and Bootstrap
 
 ### Pages
-![Mainpage](assets/mainpage.png)
+
 ![Registration](assets/registration.png)
 ![Authentication](assets/auth.png)
 ![Villas_Catalogue](assets/villas.png)
